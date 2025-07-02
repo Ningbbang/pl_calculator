@@ -3,8 +3,13 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-@app.route('/calculate/?date=<date_val>', methods=['GET'])
-def calculate(date_val):
+@app.route('/calculate/', methods=['GET'])
+def calculate():
+    date_val = request.args.get('date')  # <-- read from query param
+
+    if not date_val:
+        return jsonify({"error": "Missing 'date' query parameter"}), 400
+
     join_date = datetime.strptime(date_val, "%Y-%m-%d")
     first_amt = 12 - join_date.month
     second_date1 = datetime(join_date.year + 1, 1, 1)
