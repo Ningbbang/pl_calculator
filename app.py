@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-@app.route('/calculate/date=<date_val>', methods=['GET'])
+@app.route('/calculate/?date=<date_val>', methods=['GET'])
 def calculate(date_val):
     join_date = datetime.strptime(date_val, "%Y-%m-%d")
     first_amt = 12 - join_date.month
